@@ -1,8 +1,10 @@
 package com.vctapps.iddogchallenge.login.presentation.view
 
+import android.content.Intent
 import android.os.Bundle
 import com.vctapps.iddogchallenge.R
 import com.vctapps.iddogchallenge.core.presentation.BaseActivity
+import com.vctapps.iddogchallenge.dashboard.presentation.view.DashboardActivity
 import com.vctapps.iddogchallenge.login.presentation.presenter.LoginPresenter
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_login.*
@@ -15,8 +17,6 @@ class LoginActivity : BaseActivity(), LoginView {
     lateinit var presenter: LoginPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        AndroidInjection.inject(this)
-
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_login)
@@ -43,6 +43,7 @@ class LoginActivity : BaseActivity(), LoginView {
 
     override fun goToDashboard() {
         Timber.d("Request go to dashboard")
+        startActivity(Intent(this, DashboardActivity::class.java))
     }
 
     override fun onPause() {
