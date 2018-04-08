@@ -7,6 +7,7 @@ import com.vctapps.iddogchallenge.core.ext.isValidString
 import com.vctapps.iddogchallenge.login.data.localDataSource.LocalDataSource
 import dagger.Module
 import dagger.Provides
+import io.reactivex.schedulers.Schedulers
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
@@ -58,7 +59,9 @@ class NetworkModule {
     }
 
     private fun addHeaderInterceptor(datasourceToken: LocalDataSource, okhttp: OkHttpClient.Builder) {
-        val token = datasourceToken.getToken().blockingGet()
+        val token = datasourceToken.getToken()
+                .subscribeOn(Schedulers.io())
+                .blockingGet()
 
         if (token != null) okhttp.networkInterceptors().add(HeaderInterceptor(token))
     }
