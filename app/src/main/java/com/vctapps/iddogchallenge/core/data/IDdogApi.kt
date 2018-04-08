@@ -1,0 +1,16 @@
+package com.vctapps.iddogchallenge.core.data
+
+import com.vctapps.iddogchallenge.login.data.remoteDataSource.entity.LoginRequest
+import com.vctapps.iddogchallenge.login.data.remoteDataSource.entity.LoginResponse
+import io.reactivex.Maybe
+import retrofit2.http.Body
+import retrofit2.http.GET
+import retrofit2.http.Headers
+
+interface IDdogApi {
+
+    @GET("login")
+    @Headers("Content-Type: application/json")
+    fun login(@Body body: LoginRequest): Maybe<LoginResponse>
+
+}
