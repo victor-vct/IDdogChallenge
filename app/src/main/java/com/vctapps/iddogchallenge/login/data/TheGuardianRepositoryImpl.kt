@@ -7,14 +7,14 @@ import com.vctapps.iddogchallenge.login.data.remoteDataSource.entity.LoginRespon
 import io.reactivex.Completable
 import io.reactivex.Maybe
 
-class TheGuardianImpl(private val localDataSource: LocalDataSource,
-                      private val remoteDataSource: RemoteDataSource): TheGuardian{
+class TheGuardianRepositoryImpl(private val localDataSource: LocalDataSource,
+                                private val remoteDataSource: RemoteDataSource): TheGuardianRepository{
 
-    override fun getLoggedToken(): Maybe<String> {
+    override fun getToken(): Maybe<String> {
         return localDataSource.getToken()
     }
 
-    override fun checkUserCanSignIn(user: String): Completable {
+    override fun saveUser(user: String): Completable {
         return remoteDataSource.login(user)
                 .flatMapCompletable(this::saveLocalToken)
     }
@@ -22,8 +22,9 @@ class TheGuardianImpl(private val localDataSource: LocalDataSource,
     private fun saveLocalToken(response: LoginResponse) =
             localDataSource.saveToken(response.user.email, response.user.token)
 
-    override fun checkCanSignIn(): Maybe<Boolean> {
+    override fun hasUserStored(): Maybe<Boolean> {
         return localDataSource.getToken()
                 .flatMap { response -> Maybe.just(response.isValidString()) }
     }
 }
+

@@ -9,12 +9,11 @@ import io.reactivex.Completable
 import io.reactivex.Maybe
 import org.junit.Before
 import org.junit.Test
-import org.mockito.ArgumentMatchers
 import org.mockito.BDDMockito.*
 
-class TheGuardianTest {
+class TheGuardianRepositoryTest {
 
-    lateinit var theGuardian: TheGuardian
+    lateinit var theGuardianRepository: TheGuardianRepository
 
     val localDataSource = mock(LocalDataSource::class.java)
 
@@ -28,7 +27,7 @@ class TheGuardianTest {
 
     @Before
     fun setUp(){
-        theGuardian = TheGuardianImpl(localDataSource, remoteDataSource)
+        theGuardianRepository = TheGuardianRepositoryImpl(localDataSource, remoteDataSource)
     }
 
     @Test
@@ -39,7 +38,7 @@ class TheGuardianTest {
         given(remoteDataSource.login(VALID_USER))
                 .willReturn(Maybe.just(getMockLoginResponse()))
 
-        theGuardian.checkUserCanSignIn(VALID_USER)
+        theGuardianRepository.saveUser(VALID_USER)
                 .test()
                 .assertComplete()
 
@@ -51,7 +50,7 @@ class TheGuardianTest {
     fun `check if can't sign in with invalid user`(){
         given(remoteDataSource.login(INVALID_USER)).willReturn(Maybe.error(InvalidUser()))
 
-        theGuardian.checkUserCanSignIn(INVALID_USER)
+        theGuardianRepository.saveUser(INVALID_USER)
                 .test()
                 .assertError(InvalidUser::class.java)
 
@@ -63,7 +62,7 @@ class TheGuardianTest {
     fun `successful get token if user has logged`(){
         given(localDataSource.getToken()).willReturn(Maybe.just(VALID_TOKEN))
 
-        theGuardian.getLoggedToken()
+        theGuardianRepository.getToken()
                 .test()
                 .assertComplete()
                 .assertValue(VALID_TOKEN)
@@ -76,7 +75,7 @@ class TheGuardianTest {
     fun `on error get token`(){
         given(localDataSource.getToken()).willReturn(Maybe.error(InvalidUser()))
 
-        theGuardian.getLoggedToken()
+        theGuardianRepository.getToken()
                 .test()
                 .assertError(InvalidUser::class.java)
 
@@ -88,7 +87,7 @@ class TheGuardianTest {
     fun `successful check has user logged`(){
         given(localDataSource.getToken()).willReturn(Maybe.just(VALID_TOKEN))
 
-        theGuardian.checkCanSignIn()
+        theGuardianRepository.hasUserStored()
                 .test()
                 .assertComplete()
 
@@ -100,7 +99,7 @@ class TheGuardianTest {
     fun `on error check has user logged`(){
         given(localDataSource.getToken()).willReturn(Maybe.just(""))
 
-        theGuardian.checkCanSignIn()
+        theGuardianRepository.hasUserStored()
                 .test()
                 .assertValue(false)
 
