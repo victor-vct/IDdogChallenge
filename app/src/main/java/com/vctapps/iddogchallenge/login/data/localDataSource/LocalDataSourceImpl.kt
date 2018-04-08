@@ -49,6 +49,9 @@ class LocalDataSourceImpl(private val accountManager: AccountManager): LocalData
         return Maybe.create { emitter ->
 
             if (accountManager.getAccountsByType(ACCOUNT_TYPE)?.size == 0) {
+
+                Timber.d("no account entry")
+
                 emitter.onComplete()
             } else {
                 val account = accountManager.getAccountsByType(ACCOUNT_TYPE)[0]
@@ -72,6 +75,8 @@ class LocalDataSourceImpl(private val accountManager: AccountManager): LocalData
 
             if (accountManager.getAccountsByType(ACCOUNT_TYPE)?.size == 0) {
 
+                Timber.d("no account entry")
+
                 emitter.onComplete()
 
             } else {
@@ -82,6 +87,8 @@ class LocalDataSourceImpl(private val accountManager: AccountManager): LocalData
                     else
                         accountManager.removeAccount(account, null, null)
                 }
+
+                Timber.d("Account deleted")
 
                 emitter.onComplete()
             }

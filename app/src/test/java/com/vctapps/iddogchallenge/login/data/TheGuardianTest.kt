@@ -3,6 +3,7 @@ package com.vctapps.iddogchallenge.login.data
 import com.vctapps.iddogchallenge.login.data.localDataSource.LocalDataSource
 import com.vctapps.iddogchallenge.login.data.remoteDataSource.RemoteDataSource
 import com.vctapps.iddogchallenge.login.data.remoteDataSource.entity.LoginResponse
+import com.vctapps.iddogchallenge.login.data.remoteDataSource.entity.UserResponse
 import com.vctapps.iddogchallenge.login.data.throwables.InvalidUser
 import io.reactivex.Completable
 import io.reactivex.Maybe
@@ -108,6 +109,10 @@ class TheGuardianTest {
     }
 
     private fun getMockLoginResponse() = LoginResponse(
+            getMockUserResponse()
+    )
+
+    private fun getMockUserResponse() = UserResponse(
             VALID_USER,
             VALID_TOKEN
     )

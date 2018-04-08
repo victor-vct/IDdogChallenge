@@ -6,6 +6,7 @@ import com.vctapps.iddogchallenge.login.data.remoteDataSource.IDdogDataSource
 import com.vctapps.iddogchallenge.login.data.remoteDataSource.RemoteDataSource
 import com.vctapps.iddogchallenge.login.data.remoteDataSource.entity.LoginRequest
 import com.vctapps.iddogchallenge.login.data.remoteDataSource.entity.LoginResponse
+import com.vctapps.iddogchallenge.login.data.remoteDataSource.entity.UserResponse
 import io.reactivex.Maybe
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.MatcherAssert.assertThat
@@ -69,10 +70,14 @@ class RemoteDataSourceTest {
     }
 
     fun getMockLoginResponseSuccess() = LoginResponse(
-            email = VALID_EMAIL,
-            token = VALID_TOKEN
+            getMockUserResponse()
     )
 
     fun getMockLoginResponseError() = LoginResponse(error = ErrorResponse("Email is not valid"))
+
+    private fun getMockUserResponse() = UserResponse(
+            VALID_EMAIL,
+            VALID_TOKEN
+    )
 
 }

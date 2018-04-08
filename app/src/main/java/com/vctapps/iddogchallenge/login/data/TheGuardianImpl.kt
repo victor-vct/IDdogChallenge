@@ -20,7 +20,7 @@ class TheGuardianImpl(private val localDataSource: LocalDataSource,
     }
 
     private fun saveLocalToken(response: LoginResponse) =
-            localDataSource.saveToken(response.email, response.token)
+            localDataSource.saveToken(response.user.email, response.user.token)
 
     override fun checkCanSignIn(): Maybe<Boolean> {
         return localDataSource.getToken()
