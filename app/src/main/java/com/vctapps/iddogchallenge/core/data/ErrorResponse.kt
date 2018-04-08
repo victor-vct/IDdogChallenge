@@ -5,7 +5,7 @@ import com.vctapps.iddogchallenge.core.domain.InvalidData
 data class ErrorResponse(val message: String = ""){
 
     companion object {
-        fun invalidErrorResponse() = ErrorResponse(InvalidData.INVALID_STRING)
+        val invalidErrorResponse = ErrorResponse(InvalidData.INVALID_STRING)
     }
 
 }
