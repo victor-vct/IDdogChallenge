@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-kapt'
+
 ext {
 
     SUPPORT_LIBRARY_VERSION = '27.1.0'
@@ -94,4 +96,9 @@ dependencies {
     androidTestImplementation "org.mockito:mockito-android:${MOCKITO_CORE_VERSION}"
     testImplementation "com.squareup.okhttp:mockwebserver:${MOCK_WEBSERVER_VERSION}"
 
+}
+
+task copyFilesToCheckCoverageTests(type: Copy) {
+    from "build/tmp/kotlin-classes/debug"
+    into "build/intermediates/classes/debug"
 }
