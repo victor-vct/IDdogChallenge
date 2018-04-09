@@ -11,4 +11,6 @@ interface TheGuardian {
 
     fun checkCanComeIn(): Maybe<Boolean>
 
+    fun revokeAccess(): Completable
+
 }

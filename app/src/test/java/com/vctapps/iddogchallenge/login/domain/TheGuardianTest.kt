@@ -96,4 +96,14 @@ class TheGuardianTest {
                 .assertError(InvalidUser::class.java)
     }
 
+    @Test
+    fun `check revoke access`(){
+        given(theGuardianRepository.clearToken())
+                .willReturn(Completable.complete())
+
+        theGuardian.revokeAccess()
+                .test()
+                .assertComplete()
+    }
+
 }

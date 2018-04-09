@@ -107,6 +107,16 @@ class TheGuardianRepositoryTest {
         verify(localDataSource, times(1)).getToken()
     }
 
+    @Test
+    fun `check clear token`(){
+        given(localDataSource.deleteToken()).willReturn(Completable.complete())
+
+        theGuardianRepository.clearToken()
+                .test()
+                .assertComplete()
+
+    }
+
     private fun getMockLoginResponse() = LoginResponse(
             getMockUserResponse()
     )

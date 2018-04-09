@@ -11,4 +11,6 @@ interface TheGuardianRepository {
 
     fun hasUserStored(): Maybe<Boolean>
 
+    fun clearToken(): Completable
+
 }

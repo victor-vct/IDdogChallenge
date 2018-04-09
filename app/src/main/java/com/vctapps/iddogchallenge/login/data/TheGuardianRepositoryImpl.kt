@@ -10,9 +10,7 @@ import io.reactivex.Maybe
 class TheGuardianRepositoryImpl(private val localDataSource: LocalDataSource,
                                 private val remoteDataSource: RemoteDataSource): TheGuardianRepository{
 
-    override fun getToken(): Maybe<String> {
-        return localDataSource.getToken()
-    }
+    override fun getToken() = localDataSource.getToken()
 
     override fun saveUser(user: String): Completable {
         return remoteDataSource.login(user)
@@ -26,5 +24,7 @@ class TheGuardianRepositoryImpl(private val localDataSource: LocalDataSource,
         return localDataSource.getToken()
                 .flatMap { response -> Maybe.just(response.isValidString()) }
     }
+
+    override fun clearToken() = localDataSource.deleteToken()
 }
 

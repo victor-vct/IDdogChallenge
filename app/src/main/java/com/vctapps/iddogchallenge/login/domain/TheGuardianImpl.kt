@@ -10,4 +10,6 @@ class TheGuardianImpl(private val repository: TheGuardianRepository): TheGuardia
 
     override fun checkCanComeIn() = repository.hasUserStored()
 
+    override fun revokeAccess() = repository.clearToken()
+
 }
