@@ -35,7 +35,8 @@
         </service>
 
         <activity android:name=".dashboard.presentation.view.DashboardActivity" />
-        <activity android:name=".dog.detail.view.DogDetailActivity"></activity>
+        <activity android:name=".dog.detail.view.DogDetailActivity" />
+        <activity android:name=".about.AboutActivity"></activity>
     </application>
 
 </manifest>

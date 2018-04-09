@@ -6,4 +6,6 @@ interface DashboardView: BaseView{
 
     fun goToLogin()
 
+    fun goToAbout()
+
 }

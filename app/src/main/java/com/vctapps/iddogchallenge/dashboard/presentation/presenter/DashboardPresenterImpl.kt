@@ -31,7 +31,7 @@ class DashboardPresenterImpl(private val view: DashboardView,
     }
 
     override fun onAboutClicked() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        view.goToAbout()
     }
 
     override fun onStart() {

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import com.vctapps.iddogchallenge.R
+import com.vctapps.iddogchallenge.about.AboutActivity
 import com.vctapps.iddogchallenge.core.presentation.BaseActivity
 import com.vctapps.iddogchallenge.dashboard.presentation.presenter.DashboardPresenter
 import com.vctapps.iddogchallenge.login.presentation.view.LoginActivity
@@ -51,4 +52,9 @@ class DashboardActivity : BaseActivity(), DashboardView {
     override fun goToLogin() {
         startActivity(Intent(this, LoginActivity::class.java))
     }
+
+    override fun goToAbout() {
+        startActivity(Intent(this, AboutActivity::class.java))
+    }
+
 }
