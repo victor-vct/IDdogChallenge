@@ -1,11 +1,13 @@
 package com.vctapps.iddogchallenge.dashboard.presentation.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import com.vctapps.iddogchallenge.R
 import com.vctapps.iddogchallenge.core.presentation.BaseActivity
 import com.vctapps.iddogchallenge.dashboard.presentation.presenter.DashboardPresenter
+import com.vctapps.iddogchallenge.login.presentation.view.LoginActivity
 import kotlinx.android.synthetic.main.activity_dashboard.*
 import javax.inject.Inject
 
@@ -44,5 +46,9 @@ class DashboardActivity : BaseActivity(), DashboardView {
         }
 
         return true
+    }
+
+    override fun goToLogin() {
+        startActivity(Intent(this, LoginActivity::class.java))
     }
 }

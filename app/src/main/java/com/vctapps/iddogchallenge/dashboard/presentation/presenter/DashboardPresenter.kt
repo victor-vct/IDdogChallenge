@@ -8,6 +8,4 @@ interface DashboardPresenter: BasePresenter {
 
     fun onAboutClicked()
 
-    fun onPictureClicked()
-
 }
