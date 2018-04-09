@@ -1,7 +1,7 @@
 package com.vctapps.iddogchallenge.about
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import com.squareup.picasso.Picasso
 import com.vctapps.iddogchallenge.R
@@ -23,6 +23,37 @@ class AboutActivity : AppCompatActivity() {
                 .load(R.drawable.profile_photo)
                 .transform(CropCircleTransformation())
                 .into(profilePicture)
+
+        setUpSocialMediaButtons()
+
+        setUpContactButtons()
+    }
+
+    private fun setUpContactButtons() {
+        email.setOnClickListener {
+            startActivity(IntentContact.getEmailIntent())
+        }
+
+        projectLink.setOnClickListener {
+            startActivity(IntentContact.getProjectPage())
+        }
+    }
+
+    private fun setUpSocialMediaButtons() {
+        facebook.setOnClickListener {
+            val intent = IntentSocialMedia.facebook(this)
+            startActivity(intent)
+        }
+
+        linkedin.setOnClickListener {
+            val intent = IntentSocialMedia.linkedin()
+            startActivity(intent)
+        }
+
+        github.setOnClickListener {
+            val intent = IntentSocialMedia.github()
+            startActivity(intent)
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -34,4 +65,5 @@ class AboutActivity : AppCompatActivity() {
 
         return super.onOptionsItemSelected(item)
     }
+
 }

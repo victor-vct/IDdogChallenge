@@ -14,7 +14,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="About"
+        app:title="@string/about_title"
         app:titleTextColor="#FFFFFF" />
 
     <ImageView
@@ -31,7 +31,7 @@
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <TextView
-        android:id="@+id/name"
+        android:id="@+id/authorName"
         style="@style/TextAppearance.AppCompat.Display1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -40,7 +40,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:text="Victor Vieira"
+        android:text="@string/author_name"
         android:textColor="@color/gray_800"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -55,10 +55,10 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:text="Android Developer"
+        android:text="@string/carrer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name" />
+        app:layout_constraintTop_toBottomOf="@+id/authorName" />
 
     <ImageView
         android:id="@+id/facebook"
@@ -93,7 +93,6 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:src="@drawable/gmail"
-        android:text="Email"
         app:layout_constraintStart_toEndOf="@+id/github"
         app:layout_constraintTop_toBottomOf="@+id/developer" />
 
@@ -126,13 +125,14 @@
         android:layout_marginRight="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="O IDdog Challenge e um desafio proposto pela IDwall. Todo seu codigo pode ser encontrado no meu GitHub. :)"
+        android:text="@string/about_project"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linkedin" />
 
     <TextView
+        android:id="@+id/projectLink"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -141,7 +141,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         style="@style/TextAppearance.AppCompat.Subhead"
-        android:text="Para ver o projeto, toca aqui o/"
+        android:text="@string/link_project"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />

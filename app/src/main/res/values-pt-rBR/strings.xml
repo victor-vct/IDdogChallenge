@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="about_title">Sobre</string>
+    <string name="author_name">Victor Vieira</string>
+    <string name="carrer">Android Developer</string>
+    <string name="link_project">Para ver o projeto, toca aqui o/</string>
+    <string name="about_project">O IDdog Challenge é um desafio proposto pela IDwall. Meu código completo pode ser encontrado no GitHub. :)</string>
+
+</resources>
