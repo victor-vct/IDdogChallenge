@@ -3,18 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".dog.list.presentation.DogListFragment">
+    tools:context=".dog.list.view.DogListFragment">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerViewDogs"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Dogs"
-        style="@style/TextAppearance.AppCompat.Headline"
-        android:gravity="center"/>
+    <include layout="@layout/loading_view"/>
+
+    <include layout="@layout/error_view"/>
 
 </FrameLayout>

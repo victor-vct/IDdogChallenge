@@ -34,7 +34,8 @@
                 android:resource="@xml/authenticator" />
         </service>
 
-        <activity android:name=".dashboard.presentation.view.DashboardActivity"></activity>
+        <activity android:name=".dashboard.presentation.view.DashboardActivity" />
+        <activity android:name=".dog.detail.view.DogDetailActivity"></activity>
     </application>
 
 </manifest>
