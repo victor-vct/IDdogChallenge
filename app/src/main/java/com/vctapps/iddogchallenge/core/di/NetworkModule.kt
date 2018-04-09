@@ -3,7 +3,6 @@ package com.vctapps.iddogchallenge.core.di
 import com.google.gson.Gson
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import com.vctapps.iddogchallenge.core.data.IDdogApi
-import com.vctapps.iddogchallenge.core.ext.isValidString
 import com.vctapps.iddogchallenge.login.data.localDataSource.LocalDataSource
 import dagger.Module
 import dagger.Provides
@@ -14,7 +13,6 @@ import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import javax.inject.Singleton
 
 @Module
 class NetworkModule {
@@ -22,14 +20,12 @@ class NetworkModule {
     val BASE_URL = "https://iddog-api.now.sh/"
 
     @Provides
-    @Singleton
     fun providesIDdogApi(retrofit: Retrofit): IDdogApi {
         return retrofit.create<IDdogApi>(IDdogApi::class.java)
     }
 
 
     @Provides
-    @Singleton
     fun providesRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
                 .baseUrl(BASE_URL)
@@ -40,8 +36,7 @@ class NetworkModule {
     }
 
     @Provides
-    @Singleton
-    fun providesOkHttpClient(loggingInterceptor: HttpLoggingInterceptor,
+    fun providesOkHttpClientDashboard(loggingInterceptor: HttpLoggingInterceptor,
                              datasourceToken: LocalDataSource): OkHttpClient {
 
         val okhttp = OkHttpClient.Builder()
@@ -59,15 +54,10 @@ class NetworkModule {
     }
 
     private fun addHeaderInterceptor(datasourceToken: LocalDataSource, okhttp: OkHttpClient.Builder) {
-        val token = datasourceToken.getToken()
-                .subscribeOn(Schedulers.io())
-                .blockingGet()
-
-        if (token != null) okhttp.networkInterceptors().add(HeaderInterceptor(token))
+        okhttp.networkInterceptors().add(HeaderInterceptor(datasourceToken))
     }
 
     @Provides
-    @Singleton
     fun providesHttpLoggingInterceptor(): HttpLoggingInterceptor {
         val logging = HttpLoggingInterceptor()
 
@@ -76,11 +66,19 @@ class NetworkModule {
         return logging
     }
 
-    inner class HeaderInterceptor(val token: String): Interceptor{
+    inner class HeaderInterceptor(private val datasourceToken: LocalDataSource): Interceptor{
         override fun intercept(chain: Interceptor.Chain?): Response {
-            val request = chain?.request()?.newBuilder()?.addHeader("Authorization", token)?.build()
+            val token = datasourceToken.getToken()
+                    .subscribeOn(Schedulers.io())
+                    .blockingGet()
 
-            return chain!!.proceed(request)
+            val request = chain
+                        ?.request()
+                        ?.newBuilder()
+
+            if(token != null) request?.addHeader("Authorization", token)
+
+            return chain!!.proceed(request?.build())
         }
     }
 
