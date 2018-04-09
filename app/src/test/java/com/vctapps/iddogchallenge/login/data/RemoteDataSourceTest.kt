@@ -3,10 +3,12 @@ package com.vctapps.iddogchallenge.login.data
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import com.squareup.okhttp.mockwebserver.MockResponse
 import com.squareup.okhttp.mockwebserver.MockWebServer
+import com.vctapps.iddogchallenge.BaseNetworkTest
 import com.vctapps.iddogchallenge.core.data.IDdogApi
 import com.vctapps.iddogchallenge.login.data.remoteDataSource.IDdogDataSource
 import com.vctapps.iddogchallenge.login.data.remoteDataSource.RemoteDataSource
 import com.vctapps.iddogchallenge.login.data.throwables.CantDoSignIn
+import com.vctapps.iddogchallenge.login.data.throwables.InvalidUser
 import okhttp3.OkHttpClient
 import org.junit.After
 import org.junit.Before
@@ -14,7 +16,7 @@ import org.junit.Test
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class RemoteDataSourceTest {
+class RemoteDataSourceTest: BaseNetworkTest(){
 
     lateinit var remoteDataSource: RemoteDataSource
 
@@ -22,28 +24,11 @@ class RemoteDataSourceTest {
 
     val VALID_EMAIL = "test@mail.com"
 
-    val mockServer = MockWebServer()
-
     @Before
-    fun setUp(){
-        val okHttpClient = OkHttpClient.Builder()
-                .build()
-
-        val retrofit = Retrofit.Builder()
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .baseUrl("https://iddog-api.now.sh/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(okHttpClient)
-                .build()
-
-        val api = retrofit.create(IDdogApi::class.java)
+    override fun setUp(){
+        super.setUp()
 
         remoteDataSource = IDdogDataSource(api)
-    }
-
-    @After
-    fun `teardown`() {
-        mockServer.shutdown()
     }
 
     @Test
@@ -53,8 +38,6 @@ class RemoteDataSourceTest {
         mockedResponse.setBody(getMockLoginResponse())
 
         mockServer.enqueue(mockedResponse)
-
-        mockServer.start()
 
         remoteDataSource.login(VALID_EMAIL)
                 .test()
@@ -69,12 +52,10 @@ class RemoteDataSourceTest {
 
         mockServer.enqueue(mockedResponse)
 
-        mockServer.start()
-
         remoteDataSource
                 .login(INVALID_EMAIL)
                 .test()
-                .assertError(CantDoSignIn::class.java)
+                .assertError(InvalidUser::class.java)
 
 
     }
