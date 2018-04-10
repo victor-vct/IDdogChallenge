@@ -7,6 +7,7 @@
     android:gravity="center"
     android:id="@+id/errorView"
     android:visibility="gone"
+    android:elevation="6dp"
     android:background="#EEEEEE"
     android:padding="16dp">
 

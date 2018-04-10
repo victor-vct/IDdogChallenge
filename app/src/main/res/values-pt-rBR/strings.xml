@@ -7,4 +7,9 @@
     <string name="link_project">Para ver o projeto, toca aqui o/</string>
     <string name="about_project">O IDdog Challenge é um desafio proposto pela IDwall. Meu código completo pode ser encontrado no GitHub. :)</string>
 
+    <string name="by_author">by Victor Vieira</string>
+    <string name="email">Email</string>
+    <string name="invalid_email">Email inválido</string>
+    <string name="button_login">Me mostre os dogs!</string>
+
 </resources>

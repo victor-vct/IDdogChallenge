@@ -9,4 +9,9 @@
     <string name="link_project">To see the project, touch here o/</string>
     <string name="about_project">The Challenge IDdog is proposed by IDwall. My complete code can be found on my GitHub. :)</string>
 
+    <string name="by_author">by Victor Vieira</string>
+    <string name="email">Email</string>
+    <string name="invalid_email">Invalid email account</string>
+    <string name="button_login">Show me the dogs!</string>
+
 </resources>

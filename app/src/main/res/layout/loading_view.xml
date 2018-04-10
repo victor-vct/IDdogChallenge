@@ -6,6 +6,7 @@
     android:orientation="vertical"
     android:gravity="center"
     android:visibility="gone"
+    android:elevation="6dp"
     android:background="#EEEEEE"
     android:id="@+id/loadingView">
 

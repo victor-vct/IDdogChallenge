@@ -15,6 +15,8 @@ class LoginPresenterImpl(private val view: LoginView,
     private val compositeDisposable = CompositeDisposable()
 
     override fun onStart() {
+        if(compositeDisposable.isDisposed) compositeDisposable.clear()
+
         view.showLoading()
 
         compositeDisposable.add(

@@ -6,7 +6,6 @@ import com.vctapps.iddogchallenge.R
 import com.vctapps.iddogchallenge.core.presentation.BaseActivity
 import com.vctapps.iddogchallenge.dashboard.presentation.view.DashboardActivity
 import com.vctapps.iddogchallenge.login.presentation.presenter.LoginPresenter
-import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_login.*
 import timber.log.Timber
 import javax.inject.Inject
@@ -33,7 +32,7 @@ class LoginActivity : BaseActivity(), LoginView {
     private fun getUser() = editTextEmailLogin.text.toString()
 
     override fun showEmailInvalid() {
-        textInputLayoutLogin.error = "Email invalido"
+        textInputLayoutLogin.error = getString(R.string.invalid_email)
         textInputLayoutLogin.isErrorEnabled = true
     }
 
@@ -46,14 +45,14 @@ class LoginActivity : BaseActivity(), LoginView {
         startActivity(Intent(this, DashboardActivity::class.java))
     }
 
-    override fun onPause() {
+    override fun onDestroy() {
         presenter.onFinish()
 
-        super.onPause()
+        super.onDestroy()
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onStart() {
+        super.onStart()
 
         presenter.onStart()
     }
