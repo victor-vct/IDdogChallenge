@@ -13,6 +13,8 @@ import com.vctapps.iddogchallenge.login.domain.TheGuardian
 import com.vctapps.iddogchallenge.login.domain.TheGuardianImpl
 import com.vctapps.iddogchallenge.login.presentation.presenter.LoginPresenter
 import com.vctapps.iddogchallenge.login.presentation.presenter.LoginPresenterImpl
+import com.vctapps.iddogchallenge.login.presentation.view.DogsAnimator
+import com.vctapps.iddogchallenge.login.presentation.view.DogsAnimatorImpl
 import com.vctapps.iddogchallenge.login.presentation.view.LoginView
 import dagger.Module
 import dagger.Provides
@@ -24,6 +26,9 @@ class LoginModule {
     fun providesLoginPresenter(view: LoginView,
                                theGuardian: TheGuardian): LoginPresenter =
             LoginPresenterImpl(view, theGuardian)
+
+    @Provides
+    fun providesDogsAnimatior(): DogsAnimator = DogsAnimatorImpl()
 
     @Provides
     fun providesTheGuardian(repository: TheGuardianRepository): TheGuardian =

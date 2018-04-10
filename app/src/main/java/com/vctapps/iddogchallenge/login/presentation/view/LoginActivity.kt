@@ -15,12 +15,24 @@ class LoginActivity : BaseActivity(), LoginView {
     @Inject
     lateinit var presenter: LoginPresenter
 
+    @Inject
+    lateinit var dogsAnimator: DogsAnimator
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_login)
 
         setUpLoginButton()
+
+        setUpDogAnimation()
+    }
+
+    private fun setUpDogAnimation() {
+        dogsAnimator.addDog(imageviewPug, DogsAnimator.TO_LEFT)
+        dogsAnimator.addDog(imageviewHusky, DogsAnimator.TO_LEFT)
+        dogsAnimator.addDog(imageviewHound, DogsAnimator.TO_RIGHT)
+        dogsAnimator.addDog(imageviewLabrador, DogsAnimator.TO_RIGHT)
     }
 
     private fun setUpLoginButton() {
@@ -48,6 +60,8 @@ class LoginActivity : BaseActivity(), LoginView {
     override fun onDestroy() {
         presenter.onFinish()
 
+        dogsAnimator.stop()
+
         super.onDestroy()
     }
 
@@ -55,5 +69,8 @@ class LoginActivity : BaseActivity(), LoginView {
         super.onStart()
 
         presenter.onStart()
+
+        dogsAnimator.start()
     }
+
 }
