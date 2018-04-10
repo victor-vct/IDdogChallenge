@@ -59,6 +59,8 @@ class DogsAnimatorImpl: DogsAnimator {
 
         currentAnimator?.addListener(animatorListener)
 
+        currentAnimator?.startDelay = 20
+
         currentAnimator?.start()
     }
 
