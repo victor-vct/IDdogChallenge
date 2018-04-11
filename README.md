@@ -54,6 +54,10 @@ Internamente, ```TheGuardian```, utiliza o pattern Repository que coordena dois 
 **LocalDataSource** possui uma implementação que armazena o token do usuário no ```AccountManager``` do Android. Isso possibilita fazer com o que usuário fique sempre logado e o token armazenado com mais segurança, já que apenas aplicação com mesmo ```applicationId``` pode recuperar.
 <a name="animation" />
 
+<p align="center">
+  <img src="images/account_manager.jpeg" align="center" width=400>
+</p>
+
 ### Animações
 
 A tela de login apresenta uma animação onde cães, das quatro raças utilizadas pela API, ficam surgindo aleatoriamente. 
