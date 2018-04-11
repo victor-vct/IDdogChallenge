@@ -1,5 +1,9 @@
 # IDdogChallenge
 
+<p align="center">
+  <img src="images/app.gif" align="center" width=150>
+</p>
+
 1. [Introdução](#introduction) 
 2. [Requisitos](#requirements) 
 3. [Arquitetura](#architecture) 
@@ -35,7 +39,11 @@ Um aplicativo, em sua maioria, deve ser feito desde o começo pensando em escala
 
 Os requisitos do projeto mostram que o aplicativo deve fazer login em uma API específica, tendo como retorno um token, que depois é armazenado localmente. 
 
-Para atender os requisitos e facilitar manutenções futuras, foi criado uma estrutura de *package by feature*. O login foi separado do resto da aplicação, expondo apenas uma interface de comunicação intitulada ```TheGuardian``` (nome massa, não?! :D ).
+Para atender os requisitos e facilitar manutenções futuras, foi criado uma estrutura de *package by feature*. O login foi separado do resto da aplicação, expondo apenas uma interface de comunicação intitulada ```TheGuardian``` (nome massa, não?! :D ). Ele fica sendo o responsável por dizer se o usuário pode entrar no app.
+
+<p align="center">
+  <img src="images/the_guardian.png" align="center" width=400>
+</p>
 
 Caso futuramente a empresa ganhe mais produtos (IDcat, IDtiger etc), ```TheGuardian``` pode ser retirado do IDdog e virar uma biblioteca interna de login único da empresa, tipo o tio Google com Google SignIn.
 
@@ -55,6 +63,10 @@ A tela de login apresenta uma animação onde cães, das quatro raças utilizada
 Foi utilizado o ```AnimatorSet```, disponibilizado pelo SDK. Por ser quatro elementos diferentes sendo coordenados, é preciso fazer um estudo mais afundo, já que, segundo documentação do Google, AnimatorSet utiliza reflection podendo apresentar problemas de performance em smartphones mais simples.
 
 Para ter um código mais desacoplado e facilitar futuras tentativas de melhoria de performance, a coordenação das animações foi isolada da ```Activity``` de login.
+
+<p align="center">
+  <img src="images/interface_doganimator.png" align="center" width=200>
+</p>
 
 Isso possibilitou injetar na ```Activity``` apenas a implementação da interface. Exemplo de utilização:
 
